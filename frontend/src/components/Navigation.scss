@@ -1,0 +1,45 @@
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    border-bottom: 2px solid black;
+    a{
+        text-decoration: none;
+    }
+
+    .navbar_logo {
+        a {
+            display: block;
+            img {
+                width: 100px;
+            }
+        }
+    }
+    .navbar_menu {
+        list-style: none;
+        display: flex;
+        margin-left: auto;
+    }
+    .navbar_menu li {
+        padding: 8px 10px;
+    }
+
+    .navbar_menu li a {
+        color: inherit;
+        padding: 8px 30px;
+    }
+
+    .metamask_button {
+        display: flex;
+        margin: 0;
+        padding: 10px;
+        border-radius: 0.5rem;
+        background-color: #FFA500;
+        border: 2px solid black;
+        &:hover {
+            cursor: pointer; /* 마우스가 올라갔을 때 커서를 포인터로 변경 */
+        }
+    }
+
+}

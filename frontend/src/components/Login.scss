@@ -1,0 +1,73 @@
+.login-root {
+  border: 2px solid black;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  width: 605px;
+  height: 531px;
+  padding: 3rem;
+
+  .login-name {
+    font-size: 3em;
+    margin-top: 1.5rem;
+  }
+
+  .login-main {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .login-icon {
+      width: 100%;
+      height: 70%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      .login-img {
+        width: 20%;
+        height: 20%;
+      }
+
+      .login-phrase {
+        font-size: 3em;
+      }
+    }
+
+    .login-button {
+      width: 332px;
+      height: 40px;
+      border: 2px solid black;
+      border-radius: 0.5rem;
+      padding: 12px;
+
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      &:hover {
+        cursor: pointer; /* 마우스가 올라갔을 때 커서를 포인터로 변경 */
+      }
+    }
+  }
+}
+
+#metamask-img{
+  width: 40px;
+  height: 40px;
+  margin-left: 10px
+}
+
+#metamask-font{
+  font-size: 1.2rem;
+  margin-right: 10px;
+}

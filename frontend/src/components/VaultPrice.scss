@@ -1,0 +1,13 @@
+.prices-root {
+  border-top: 2px solid black;
+  flex: 1;
+
+  table {
+    width: 100%;
+    height: 100%;
+    td {
+      text-align: center;
+      vertical-align: middle;
+    }
+  }
+ }

@@ -7,8 +7,8 @@ const categories = [
         path: '/portfolio'
     },
     {
-        name: 'options',
-        path: '/options'
+        name: 'vaults',
+        path: '/vaults'
     }
 ]
 const Navigation = ({wallet, onConnect}) => {

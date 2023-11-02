@@ -1,0 +1,47 @@
+.vault-cover {
+  display: flex;
+  flex: 1;
+
+  .vault-left {
+    display: flex;
+    width: 60%;
+    flex-direction: column;
+    margin-left: 20px;
+  }
+  .vault-right {
+    margin-right: 20px;
+    flex:1;
+    border-left: 2px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:flex-start;
+
+    .vault-name {
+      width: 100%;
+      height: 80px;
+      font-size: 3rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .vault-index-parent {
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+    }
+  }
+}
+
+#vault-index {
+  flex: 1;
+  border: 1px solid black;
+  margin: 5px;
+  height: 20px;
+  border-radius: 0.5rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -3,7 +3,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 8px 12px;
-    border-bottom: 2px solid black;
+
     a{
         text-decoration: none;
     }
@@ -36,7 +36,7 @@
         padding: 10px;
         border-radius: 0.5rem;
         background-color: #FFA500;
-        border: 2px solid black;
+
         &:hover {
             cursor: pointer; /* 마우스가 올라갔을 때 커서를 포인터로 변경 */
         }

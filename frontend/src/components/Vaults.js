@@ -51,9 +51,9 @@ const Vaults = () => {
                         <b>Vaults</b>
                     </div>
                     <div className='vault-index-parent'>
-                        <div id='vault-index'>Tokens</div>
-                        <div id='vault-index'>Type</div>
-                        <div id='vault-index'>Sort By</div>
+                        <div id='vault-index'>BaseAsset</div>
+                        <div id='vault-index'>TVL</div>
+                        <div id='vault-index'>Expiry</div>
                     </div>
                     <VaultList setBaseAsset={setBaseAsset} setVaultPriceInfo={setVaultPriceInfo} setChosenVault={setChosenVault}/>
                 </div>

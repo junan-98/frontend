@@ -1,0 +1,15 @@
+.balance-list {
+    border: 2px solid black;
+    margin: 10px;
+    border-radius: 1.5rem;
+    height: 300px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    .balance-mark {
+        font-size: 2rem;
+
+    }
+}

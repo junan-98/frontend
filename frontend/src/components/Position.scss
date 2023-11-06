@@ -1,0 +1,32 @@
+.position-cover {
+    height: 100%;
+}
+.position {
+    height: 50%;
+    border: 2px solid black;
+    border-radius: 1.5rem;
+    margin: 10px;
+  
+    table {
+      width: 100%;
+      tr {
+        height: 50px;
+      }
+      td {
+        text-align: center;
+        vertical-align: middle;
+      }
+    }
+}
+.position-mark {
+    margin-left: 35px;
+    font-size: 2rem;
+}
+.positionExitButton {
+    padding: 10px;
+    border-radius: 1rem;
+    background-color: #abd5bd;
+    &:hover {
+        cursor: pointer;
+    }
+}

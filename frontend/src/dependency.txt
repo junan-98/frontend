@@ -2,4 +2,5 @@ yarn add react-router-dom
 yarn add sass
 yarn add ethers@5.7
 yarn add react-crypto-chart
+yarn add redux react-redux
 npm install lightweight-charts

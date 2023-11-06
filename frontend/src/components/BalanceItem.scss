@@ -1,0 +1,29 @@
+#balance-item {
+    border: 1px solid black;
+    border-radius: 1rem;
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    width: 90%;
+    height: 75px;
+    margin: 10px;
+}
+
+#asset-image {
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#asset-image img{
+    max-width: 60%;
+    max-height: 60%;
+}
+
+#asset-amount {
+    font-size: 1.5rem;
+    margin-right: 10%;
+}

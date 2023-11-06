@@ -14,7 +14,8 @@ const Portfolio = () => {
             amount: '???',
             order_time: 'YYMMdd',
             expiry: 'YYMMdd',
-            position: 'buy'
+            position: 'buy',
+            contractAddrss: '0x?????'
         },
         {
             product: 'ETH_WEEKLY_PUT',
@@ -24,7 +25,8 @@ const Portfolio = () => {
             amount: '???',
             order_time: 'YYMMdd',
             expiry: 'YYMMdd',
-            position: 'buy'
+            position: 'buy',
+            contractAddrss: '0x?????'
         },
         {
             product: 'ETH_WEEKLY_CALL',
@@ -34,7 +36,9 @@ const Portfolio = () => {
             amount: '???',
             order_time: 'YYMMdd',
             expiry: 'YYMMdd',
-            position: 'sell'
+            position: 'sell',
+            contractAddrss: '0x?????'
+
         }
     ]);
 

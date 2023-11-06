@@ -2,12 +2,12 @@ import './Position.scss';
 
 //ETH_WEEKLY_PUT / ROUND / STRIKE_PRICE / SETTLEMENT_PRICE / AMOUNT / ORDER_TIME / withdraw(settlement)
 const PositionOpen = ({openedPosition}) => {
-    const settleOption = (order_time, expiry) => {
-        console.log(order_time);
+    const settleOption = (position) => {
+        console.log(position);
     }
 
-    const withdrawOption = (order_time, expiry) => {
-        console.log(order_time);
+    const withdrawOption = (position) => {
+        console.log(position);
     }
 
     return (
@@ -42,8 +42,8 @@ const PositionOpen = ({openedPosition}) => {
                             <td>{position.expiry}</td>
                             <td>
                                 {position.position === 'buy' ? 
-                                    <div className='positionExitButton' id='settlement' onClick={() => {settleOption(position.order_time, position.expiry)}}>settle</div> :
-                                        <div className='positionExitButton' id='withdraw' onClick={() => {withdrawOption(position.order_time, position.expiry)}}>withdraw</div>}
+                                    <div className='positionExitButton' id='settlement' onClick={() => {settleOption(position)}}>settle</div> :
+                                        <div className='positionExitButton' id='withdraw' onClick={() => {withdrawOption(position)}}>withdraw</div>}
                             </td>
                         </tr>
                     )

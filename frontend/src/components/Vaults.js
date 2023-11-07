@@ -1,61 +1,27 @@
-import VaultList from "./VaultList";
-import Chart from "./Chart";
 import VaultPrice from "./VaultPrice";
 import './Vaults.scss'
-import {useState} from "react";
+import { useState } from "react";
+import ChartArb from "./ChartARB";
+import ChartETH from "./ChartETH";
+import VaultProducts from "./VaultProducts";
+import VaultTrade from "./VaultTrade";
+
 
 const Vaults = () => {
-    // ETHUSDT OR ARBUSDT
-    const [baseAsset, setBaseAsset] = useState('ETHUSDT');
-
-    //const initialVaultPriceInfo = [];
-    const initialVaultPriceInfo = [
-        {
-            strikePrice: '???$',
-            optionPrice: '???$',
-            available: '???'
-        },
-        {
-            strikePrice: '???$',
-            optionPrice: '???$',
-            available: '???'
-        },
-        {
-            strikePrice: '???$',
-            optionPrice: '???$',
-            available: '???'
-        },
-        {
-            strikePrice: '???$',
-            optionPrice: '???$',
-            available: '???'
-        },
-    ];
-    const [chosenVault, setChosenVault] = useState({
-        address: '0x??',
-        name: '',
-        round: '?',
-        tvl: '',
-        expiry: 'YYMMdd'
-    })
-    const [vaultPriceInfo, setVaultPriceInfo] = useState(initialVaultPriceInfo);
+    const [chosenVault, setChosenVault] = useState(null);
+    const [tradePhase, setTradePhase] = useState(false);
+    const [tradeProduct, setTradeProduct] = useState(null);
     return (
         <>
             <div className='vault-cover'>
                 <div className='vault-left'>
-                    <Chart baseAsset={baseAsset}/>
-                    <VaultPrice vaultPriceInfo={vaultPriceInfo}/>
+                    {(chosenVault !== null && chosenVault.baseAsset === 'ARBUSDT')? <ChartArb /> : <ChartETH />}
+                    <VaultPrice chosenVault={chosenVault} setTradePhase={setTradePhase} setTradeProduct={setTradeProduct}/>
                 </div>
                 <div className='vault-right'>
-                    <div className='vault-name'>
-                        <b>Vaults</b>
-                    </div>
-                    <div className='vault-index-parent'>
-                        <div id='vault-index'>BaseAsset</div>
-                        <div id='vault-index'>TVL</div>
-                        <div id='vault-index'>Expiry</div>
-                    </div>
-                    <VaultList setBaseAsset={setBaseAsset} setVaultPriceInfo={setVaultPriceInfo} setChosenVault={setChosenVault}/>
+                    {
+                        tradePhase ? <VaultTrade tradeProduct={tradeProduct} /> : <VaultProducts setChosenVault={setChosenVault} />
+                    }
                 </div>
             </div>
         </>

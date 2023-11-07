@@ -5,7 +5,7 @@ import Vaults from "./Vaults";
 import Portfolio from './Portfolio';
 
 const Contents = ({wallet, onConnect}) => {
-
+    
     return (
         <div className='content-root'>
             <Routes>

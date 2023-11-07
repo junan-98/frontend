@@ -1,0 +1,81 @@
+.vault-trade-root {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    
+
+    .trade-buy {
+        border: 2px solid black;
+        border-radius: 5px;
+        width: 80%;
+        height: 600px;
+        margin-left: 50px;
+        margin-bottom: 10px;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
+    }
+
+    .trade-sell {
+        border: 2px solid black;
+        border-radius: 5px;
+        width: 80%;
+        height: 270px;
+        margin-left: 50px;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+#position-name {
+    font-size: 40px;
+    margin-bottom: 30px;
+}
+
+#view-option {
+    font-size: 20px;
+    border: 5px solid gray;
+    border-radius: 20px;
+    width: 80%;
+
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-bottom: 10px;
+}
+
+input {
+    //기본 스타일 초기화
+    flex: 1;
+    background: none;
+    outline: none;
+    border: none;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: right;
+}
+
+.execute-button {
+    margin-top: auto;
+    border: 2px solid black;
+    border-radius: 5rem;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 40px;
+    padding-right: 40px;
+    margin-bottom: 10px;
+
+    
+
+    &:hover {
+        cursor: pointer;
+    }
+}

@@ -3,12 +3,11 @@ import React, { useEffect, useState } from "react";
 import TradeViewChart from "react-crypto-chart";
 
 
-const Chart = ({ chosenVault }) => {
-    let baseAsset = chosenVault !== null ? chosenVault.baseAsset : 'ETHUSDT';
+const ChartETH = () => {
   return (
     <div className="chart-root">
       <div className="chart-name">
-        <b>{baseAsset}</b>
+        <b>ETHUSDT</b>
       </div>
       <div className="chart-main" id="chart-main">
       <TradeViewChart
@@ -37,4 +36,4 @@ const Chart = ({ chosenVault }) => {
   );
 };
 
-export default Chart;
+export default React.memo(ChartETH);

@@ -8,7 +8,6 @@ import {
 } from "recharts";
 
 const PnLChart = ({ isPut, strikePrice, optionPrice }) => {
-    optionPrice = 50;
   const data = [];
   if (isPut) {
     let indexPriceFuture = 0;

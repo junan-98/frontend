@@ -2,9 +2,10 @@ import BalanceList from "./BalanceList";
 import PositionClose from "./PositionClose";
 import PositionOpen from "./PositionOpen";
 import './Portfolio.scss';
-import { useState } from "react";
-
-const Portfolio = () => {
+import { useState, useEffect } from "react";
+import { getPortfolioBalance } from "../lib/tokenTransaction";
+const Portfolio = ({wallet}) => {
+    console.log('Portfolio Wallet', wallet);
     const [openedPosition, setOpenedPosition] = useState([
         {
             product: 'ETH_WEEKLY_PUT',
@@ -59,11 +60,31 @@ const Portfolio = () => {
             amount: '???',
             pnl: '-????$'
         },
-    ])
+    ]);
+    const [balances, setBalances] = useState([]);
+    const [loading, setLoading] = useState(false);
+    useEffect(() => {
+        const fetchData = async () => {
+            setLoading(true);
+            try {
+                const b = await getPortfolioBalance(wallet.address);
+                setBalances(b);
+            } catch(e) {
+                console.log(e)
+            };
+            setLoading(false);
+        };
+        fetchData();
+    }, [wallet]);
+    if(loading) {
+        return (<div class="loading__container">
+        <div class="loading--cycle"></div>
+      </div>)
+    }
     return (
         <div className="Portfolio">
             <div className="portfolio-left">
-                <BalanceList />
+                <BalanceList balances={balances}/>
             </div>
             <div className="potfolio-right">
                 <PositionOpen openedPosition={openedPosition} />

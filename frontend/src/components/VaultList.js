@@ -14,7 +14,7 @@ const VaultList = ({setChosenVault}) => {
                     'http://localhost:8080/api/options/get_option_info',
                 );
                 const data = response.data;
-                const formattedData = data.map(item => {
+                const formattedData = data.map(item =>  {
                     const dateObject = new Date(item.expiry);
                     const formattedDate = `${dateObject.getFullYear().toString().substr(-2)}.${(dateObject.getMonth() + 1)}.${dateObject.getDate()}`;
                     return { ...item, expiry: formattedDate };
@@ -28,6 +28,8 @@ const VaultList = ({setChosenVault}) => {
         };
         fetchData();
     }, []);
+
+    
     if(loading) {
         return <div>loading ...</div>
     }

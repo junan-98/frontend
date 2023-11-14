@@ -3,6 +3,7 @@ import usdc_logo from "../icons/usdc.svg";
 import './BalanceItem.scss';
 
 const BalanceItem = ({ balance }) => {
+  console.log(balance);
   return (
     <div id="balance-item">
       <div id="asset-image">

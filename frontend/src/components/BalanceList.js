@@ -3,17 +3,8 @@ import BalanceItem from "./BalanceItem";
 import './BalanceList.scss';
 
 
-const BalanceList = () => {
-    const [balances, setBalances] = useState([
-        {
-            asset: 'ETH',
-            balance: '0'
-        },
-        {
-            asset: 'USDC',
-            balance: '0'
-        },
-    ]);
+const BalanceList = ({balances}) => {
+
     return (
         <div className="balance-list">
             <div className="balance-mark">

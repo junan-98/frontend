@@ -31,7 +31,7 @@ const VaultPrice = ({chosenVault, setTradePhase, setTradeProduct}) => {
                         strikePrice: item.strikePrice,
                         optionPrice: item.optionPrice,
                         available: item.availableAmount,
-                        strikeId: item.strikeId,
+                        strikeIndex: item.strikeIndex,
                         address: item.option.optionAddress
                     };
                 });
@@ -45,7 +45,9 @@ const VaultPrice = ({chosenVault, setTradePhase, setTradeProduct}) => {
             fetchData();
     }, [chosenVault]);
     if(loading) {
-        return <div>loading ...</div>
+        return(<div class="loading__container">
+        <div class="loading--cycle"></div>
+      </div>);
     }
     if(!vaultInfo) {
         return <div className='no-vault-selected'><b>SELECT VAULT</b></div>

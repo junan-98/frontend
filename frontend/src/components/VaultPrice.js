@@ -1,7 +1,6 @@
 import './VaultPrice.scss'
 import { useState, useEffect } from 'react';
-import axios from 'axios';
-
+import { fetchVaultInfo } from '../lib/api';
 
 const VaultPrice = ({chosenVault, setTradePhase, setTradeProduct}) => {
     const [vaultInfo, setVaultInfo] = useState(null);
@@ -17,32 +16,8 @@ const VaultPrice = ({chosenVault, setTradePhase, setTradeProduct}) => {
     }
 
     useEffect(() => {
-        const fetchData = async () => {                
-            setLoading(true);
-            try {
-                const response = await axios.get(
-                    `http://localhost:8080/api/strikes/byOptionId?optionId=${chosenVault.optionId}`,
-                );
-                const data = response.data;
-                console.log('VaultPrice api', data);
-                const strikeInfo = data.map(item => {
-                    console.log('item', item);
-                    return {
-                        strikePrice: item.strikePrice,
-                        optionPrice: item.optionPrice,
-                        available: item.availableAmount,
-                        strikeIndex: item.strikeIndex,
-                        address: item.option.optionAddress
-                    };
-                });
-                setVaultInfo(strikeInfo);
-            } catch(e) {
-                console.log(e)
-            };
-            setLoading(false);
-        };
         if(chosenVault != null)
-            fetchData();
+            fetchVaultInfo(setLoading, setVaultInfo, chosenVault.optionId);
     }, [chosenVault]);
     if(loading) {
         return(<div class="loading__container">

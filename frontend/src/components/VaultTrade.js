@@ -24,7 +24,7 @@ const VaultTrade = ({tradeProduct}) => {
             alert("incorrect option amount");
             return;
         }
-        await purchaseOption(tradeProduct.address, tradeProduct.strikeIndex, buyValue, setTradingStatus);
+        await purchaseOption(tradeProduct, buyValue, setTradingStatus);
     }, [buyValue, tradeProduct]);
     const writeOption = useCallback(async () => {
         console.log(`Write ${writeValue} options`);
@@ -32,7 +32,7 @@ const VaultTrade = ({tradeProduct}) => {
             alert("incorrect option amount");
             return;
         }
-        await depositOption(tradeProduct.address, tradeProduct.strikeIndex, writeValue, setTradingStatus);
+        await depositOption(tradeProduct, writeValue, setTradingStatus);
     }, [writeValue, tradeProduct]);
 
     return (

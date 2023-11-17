@@ -31,6 +31,7 @@ const PositionOpen = ({openedPosition}) => {
                 </thead>
                 <tbody>
                 {openedPosition.map((position, index) => {
+                    console.log(position);
                     return (
                         <tr style={{ backgroundColor: index % 2 === 0 ? '#ffffff' : '#f1f3f5' }} key={index}>
                             <td>{position.product}</td>
@@ -41,7 +42,7 @@ const PositionOpen = ({openedPosition}) => {
                             <td>{position.order_time}</td>
                             <td>{position.expiry}</td>
                             <td>
-                                {position.position === 'buy' ? 
+                                {position.position !== 'write' ? 
                                     <div className='positionExitButton' id='settlement' onClick={() => {settleOption(position)}}>settle</div> :
                                         <div className='positionExitButton' id='withdraw' onClick={() => {withdrawOption(position)}}>withdraw</div>}
                             </td>

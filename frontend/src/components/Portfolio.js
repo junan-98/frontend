@@ -4,69 +4,19 @@ import PositionOpen from "./PositionOpen";
 import './Portfolio.scss';
 import { useState, useEffect } from "react";
 import { getPortfolioBalance } from "../lib/tokenTransaction";
+import { getClosedPosition, getOpenedPosition } from "../lib/api";
 const Portfolio = ({wallet}) => {
     console.log('Portfolio Wallet', wallet);
-    const [openedPosition, setOpenedPosition] = useState([
-        {
-            product: 'ETH_WEEKLY_PUT',
-            round: 2,
-            strike_price: '???????$',
-            settlement_price: '?????????$',
-            amount: '???',
-            order_time: 'YYMMdd',
-            expiry: 'YYMMdd',
-            position: 'buy',
-            contractAddrss: '0x?????'
-        },
-        {
-            product: 'ETH_WEEKLY_PUT',
-            round: 2,
-            strike_price: '???????$',
-            settlement_price: '?????????$',
-            amount: '???',
-            order_time: 'YYMMdd',
-            expiry: 'YYMMdd',
-            position: 'buy',
-            contractAddrss: '0x?????'
-        },
-        {
-            product: 'ETH_WEEKLY_CALL',
-            round: 2,
-            strike_price: '???????$',
-            settlement_price: '?????????$',
-            amount: '???',
-            order_time: 'YYMMdd',
-            expiry: 'YYMMdd',
-            position: 'sell',
-            contractAddrss: '0x?????'
-
-        }
-    ]);
-
-    const [closedPosition, setClosedPosition] = useState([
-        {
-            product: 'ETH_WEEKLY_PUT',
-            round: 1,
-            strike_price: '???????$',
-            settlement_price: '?????????$',
-            amount: '???',
-            pnl: '+???$'
-        },
-        {
-            product: 'ETH_WEEKLY_CALL',
-            round: 1,
-            strike_price: '???????$',
-            settlement_price: '?????????$',
-            amount: '???',
-            pnl: '-????$'
-        },
-    ]);
+    const [openedPosition, setOpenedPosition] = useState([]);
+    const [closedPosition, setClosedPosition] = useState([]);
     const [balances, setBalances] = useState([]);
     const [loading, setLoading] = useState(false);
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
             try {
+                await getOpenedPosition(setOpenedPosition);
+                await getClosedPosition(setClosedPosition);
                 const b = await getPortfolioBalance(wallet.address);
                 setBalances(b);
             } catch(e) {
@@ -76,11 +26,11 @@ const Portfolio = ({wallet}) => {
         };
         fetchData();
     }, [wallet]);
-    if(loading) {
-        return (<div class="loading__container">
-        <div class="loading--cycle"></div>
-      </div>)
-    }
+    // if(loading) {
+    //     return (<div class="loading__container">
+    //     <div class="loading--cycle"></div>
+    //   </div>)
+    // }
     return (
         <div className="Portfolio">
             <div className="portfolio-left">

@@ -23,21 +23,20 @@ export async function purchaseOption(tradeProduct, amount, setTradingStatus) {
         const clientAddress = await signer.getAddress();
         setTradingStatus('trade');
     
-        const allowance = await allowanceUSDC(signer, clientAddress, address);
+        const tmp = await allowanceUSDC(signer, clientAddress, address);
+        const allowance = Number(tmp._hex);
         console.log('allowance: ', Number(allowance));
     
         // check premium to pay
         const contract = new ethers.Contract(address, DOV_ABI, signer);
-        // const premium = await contract._calculatePremium(ethers.utils.parseUnits(optionPrice, 6), ethers.utils.parseEther(amount));
+        
         // 그냥 프리미엄은 트랜잭션 보내서 프리미엄 계산하지 말고 내부적으로 계산
         const premium = Number(amount) * Number(optionPrice) * 1000000;
         console.log('premium to pay:', premium);
         if (Number(premium) > Number(allowance)) {
             try{
                 // approve
-                const amountToApprove = Number(premium) - Number(allowance)
-                console.log('approve', amountToApprove)
-                await approveUSDC(signer, address, amountToApprove);
+                await approveUSDC(signer, address, premium);
             } catch(e) {
                 console.error('error in approve', e);
                 setTradingStatus('default');
@@ -53,6 +52,7 @@ export async function purchaseOption(tradeProduct, amount, setTradingStatus) {
         updateOrders(clientAddress, 'purchase', amount, tradeProduct);
         
     } catch(error) {
+        setTradingStatus('default');
         console.error("Error in deposit:", error);
     } 
 }
@@ -68,15 +68,15 @@ export async function depositOption(tradeProduct, amount, setTradingStatus) {
 
         setTradingStatus('trade')
         // check allowance
-        const allowance = await allowanceUSDC(signer, clientAddress, address);
+        const tmp = await allowanceUSDC(signer, clientAddress, address);
+        const allowance = Number(tmp._hex);
         console.log('allowance: ', Number(allowance));
-        
-        if(Number(allowance) < Number(amount) * 1000000) {
+
+        const collateral = Number(amount) * 10**6 * Number(tradeProduct.strikePrice);
+        console.log('collateral', collateral);
+        if(Number(allowance) < collateral) {
             try{
-                // approve
-                const amountToApprove = Number(amount) * 1000000 - Number(allowance)
-                console.log('approve', amountToApprove)
-                await approveUSDC(signer, address, amountToApprove);
+                await approveUSDC(signer, address, collateral);
             } catch(e) {
                 console.error('error in approve', e);
                 setTradingStatus('default');
@@ -86,7 +86,8 @@ export async function depositOption(tradeProduct, amount, setTradingStatus) {
         
         const contract = new ethers.Contract(address, DOV_ABI, signer);
         
-        const txn = await contract.deposit(strikeIndex, ethers.utils.parseEther(amount), clientAddress);
+        console.log(ethers.utils.parseUnits(collateral.toString(), 12));
+        const txn = await contract.deposit(strikeIndex, ethers.utils.parseUnits(collateral.toString(), 12), clientAddress);
         await txn.wait();
         setTradingStatus('default');
         console.log("Deposit successful:", txn.hash);
@@ -95,6 +96,7 @@ export async function depositOption(tradeProduct, amount, setTradingStatus) {
         updateOrders(clientAddress, 'write', amount, tradeProduct);
         
       } catch (error) {
+        setTradingStatus('default');
         console.error("Error in deposit:", error);
     } 
 }   

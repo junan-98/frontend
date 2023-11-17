@@ -42,11 +42,11 @@ export async function getPortfolioBalance(address){
     return [
         {
             asset: 'ETH',
-            balance: matic_formatted.substring(0,6)
+            balance: matic_formatted.substring(0,8)
         },
         {
             asset: 'USDC',
-            balance: usdc_formatted.substring(0,6)
+            balance: usdc_formatted.substring(0,8)
         }
     ];
 }
@@ -63,6 +63,10 @@ export async function approveUSDC(signer, spender, amount) {
 export async function allowanceUSDC(signer, from, to) {
     const usdcContract = new ethers.Contract(USDC, USDC_ABI, signer);
     const allowance = await usdcContract.allowance(from, to);
-    return ethers.utils.formatUnits(allowance, 6);
+    console.log(allowance);
+    return allowance;
 }
-  
+
+
+// 5563.1
+

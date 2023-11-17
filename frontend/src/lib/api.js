@@ -63,3 +63,45 @@ export async function updateOrders(clientAddress, position, amount, tradeProduct
         console.log(e)
     };
 }
+
+export async function getOpenedPosition(setOpenedPosition) {
+    try {
+        const response = await axios.get(
+            `http://localhost:8080/api/orders/openedPosition`,
+        );
+        const data = response.data;
+        const position = data.map(item => {
+            console.log('position', item);
+            return {
+                product: item.symbol,
+                round: item.option.round,
+                strike_price: item.strikePrice,
+                settlement_price: item.settlementPrice,
+                amount: item.amount,
+                order_time: item.orderTime,
+                expiry: item.option.expiry,
+                position: item.position,
+                option: item.option
+            };
+        });
+        console.log('position:', position)
+        setOpenedPosition(position);
+    } catch(e) {
+        console.log(e)
+    };
+
+}
+
+export async function getClosedPosition(setClosedPosition) {
+    try {
+        const response = await axios.get(
+            `http://localhost:8080/api/orders/historicalPosition`,
+        );
+        const data = response.data;
+        console.log('OpenedPosition', data);
+        
+        setClosedPosition(data);
+    } catch(e) {
+        console.log(e)
+    };
+}

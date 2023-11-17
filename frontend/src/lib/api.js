@@ -50,15 +50,15 @@ export async function fetchVaultInfo(setLoading, setVaultInfo, optionId) {
  */
 export async function updateOrders(clientAddress, position, amount, tradeProduct) {
     const data = {
-        client_address: clientAddress,
-        option_id: tradeProduct.optionId,
-        strike_price: tradeProduct.strikePrice,
+        clientAddress: clientAddress,
+        optionId: tradeProduct.optionId,
+        strikePrice: tradeProduct.strikePrice,
         amount: amount,
         position: position
     };
     console.log('update orders', data);
     try {
-        axios.post('http://localhost:8080/api/vault/updateOrders', data);
+        axios.post('http://localhost:8080/api/orders/sendPosition', data);
     } catch(e) {
         console.log(e)
     };
@@ -84,7 +84,7 @@ export async function getOpenedPosition(setOpenedPosition) {
                 option: item.option
             };
         });
-        console.log('position:', position)
+        console.log('opened position:', position)
         setOpenedPosition(position);
     } catch(e) {
         console.log(e)
@@ -98,9 +98,23 @@ export async function getClosedPosition(setClosedPosition) {
             `http://localhost:8080/api/orders/historicalPosition`,
         );
         const data = response.data;
-        console.log('OpenedPosition', data);
+        const position = data.map(item => {
+            console.log('position', item);
+            return {
+                product: item.symbol,
+                round: item.option.round,
+                strike_price: item.strikePrice,
+                settlement_price: item.settlementPrice,
+                amount: item.amount,
+                order_time: item.orderTime,
+                expiry: item.option.expiry,
+                position: item.position,
+                option: item.option
+            };
+        });
+        console.log('closed position:', position)
         
-        setClosedPosition(data);
+        setClosedPosition(position);
     } catch(e) {
         console.log(e)
     };

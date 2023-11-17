@@ -66,7 +66,3 @@ export async function allowanceUSDC(signer, from, to) {
     console.log(allowance);
     return allowance;
 }
-
-
-// 5563.1
-

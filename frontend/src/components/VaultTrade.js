@@ -18,8 +18,13 @@ const VaultTrade = ({tradeProduct}) => {
         setWriteValue(e.target.value);
     }, []);
 
+
     const buyOption = useCallback(async () =>{
         console.log(`Buy ${buyValue} options`);
+        if (tradeProduct.available < Number(buyValue)){
+            alert("you cannot buy more than available");
+            return;
+        }
         if(!Number(buyValue) || Number(buyValue) < 0) {
             alert("incorrect option amount");
             return;
@@ -61,7 +66,7 @@ const VaultTrade = ({tradeProduct}) => {
                         </div>
                     </div>
                     <div className='PnL Graph' >
-                        <PnLChart optionPrice={parseInt(tradeProduct.optionPrice)} strikePrice={parseInt(tradeProduct.strikePrice)} isPut={true}/>
+                        <PnLChart optionPrice={Number(tradeProduct.optionPrice)} strikePrice={Number(tradeProduct.strikePrice)} isPut={true} amount={Number(buyValue)}/>
                     </div>
                     {
                         tradingStatus === 'default' ? 

@@ -1,14 +1,15 @@
 import { ethers } from "ethers";
 import { approveUSDC, allowanceUSDC, RPC } from "./tokenTransaction";
-import { switchToPolygonMumbai } from "./wallet";
 import { updateOrders } from "./api";
+import VaultTrade from "../components/VaultTrade";
 
 const DOV_ABI= [
     "function purchase(uint strikeIndex, uint amount, address to) external returns (uint premium)",
     "function _calculatePremium(uint optionPrice, uint amount) public view returns(uint premium) ",
     "function deposit(uint _strikeIndex, uint amount, address to) external returns (uint tokenId)",
     "function settle(uint strikeIndex, uint amount, uint round, address to) external returns (uint pnl) ",
-    "function withdraw(uint tokenId, address to) external returns(uint256 writerPnl)"
+    "function withdraw(uint tokenId, address to) external returns(uint256 writerPnl)",
+    "function getAvailable(uint round) external view returns(uint available0, uint available1, uint available2, uint available3)"
 ];  
   
 
@@ -99,4 +100,29 @@ export async function depositOption(tradeProduct, amount, setTradingStatus) {
         setTradingStatus('default');
         console.error("Error in deposit:", error);
     } 
-}   
+}
+
+const normalizeDecimal = (avaialbe) => {
+    return Number(avaialbe) / 10 ** 18;
+}
+
+export async function getAvailable(vault, round, setAvailables) {
+    console.log('!',vault);
+    console.log('!', round);
+   try {
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = provider.getSigner();
+        const contract = new ethers.Contract(vault[0].address, DOV_ABI, signer);
+        const result = await contract.getAvailable(round)
+        const avaialbes = result.map(normalizeDecimal);
+        console.log('available reuslt', avaialbes);
+        for (let i = 0; i < avaialbes.length; i++) {
+            avaialbes[i] = avaialbes[i] / Number(vault[i].strikePrice);
+        }
+        
+        setAvailables(avaialbes);
+
+   } catch(error) {
+        console.error("ERROR FETCHING AVAILABLE", error);
+   }
+}

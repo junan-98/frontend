@@ -19,7 +19,7 @@ const ChartArb = () => {
           }}
           chartLayout={{
             layout: {
-              backgroundColor: "white",
+              backgroundColor: "#e6e6e6",
               textColor: "black",
             },
             timeScale: {

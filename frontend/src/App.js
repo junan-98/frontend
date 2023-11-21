@@ -3,7 +3,7 @@ import Contents from "./components/Contents";
 import './App.css'
 import {useEffect, useState} from "react";
 import { conWeb3 } from "./lib/wallet";
-
+import './global.css'; 
 // Simplify Wallect conenction
 const App = () => {
     // sessionStorage에 wallet정보를 저장해서 새로고침시에도 wallet정보를 유지한다.

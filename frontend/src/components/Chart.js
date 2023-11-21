@@ -12,7 +12,7 @@ const Chart = ({ chosenVault }) => {
       </div>
       <div className="chart-main" id="chart-main">
       <TradeViewChart
-          style={{ background: "white", maxWidth: "100%", maxHeight: "100%" }}
+          style={{ background: "gray", maxWidth: "100%", maxHeight: "100%" }}
           interval="5m"
           containerStyle={{
             minHeight: "500px",

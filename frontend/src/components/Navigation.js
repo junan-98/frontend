@@ -1,5 +1,5 @@
 import './Navigation.scss';
-import logo from '../icons/dov_name.png';
+import logo from '../icons/dov.png';
 
 const categories = [
     {

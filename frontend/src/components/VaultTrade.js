@@ -1,5 +1,5 @@
 import PnLChart from './PnLChart';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import './VaultTrade.scss';
 import { purchaseOption, depositOption } from '../lib/tradeTransaction';
 
@@ -10,6 +10,22 @@ const VaultTrade = ({tradeProduct}) => {
     const [buyValue, setBuyValue] = useState('');
     const [writeValue, setWriteValue] = useState('');
     const [tradingStatus, setTradingStatus] = useState('default');
+    const [loadingText, setLoadingText] = useState('Waiting Tx');
+
+    useEffect(() => {
+      const interval = setInterval(() => {
+        setLoadingText(prev => {
+          if (prev.endsWith('...')) {
+            return 'Waiting Tx';
+          }
+          return prev + '.';
+        });
+      }, 1000);
+  
+      // 컴포넌트 언마운트 시 인터벌 클리어
+      return () => clearInterval(interval);
+    }, []);
+
 
     const onChangeBuy = useCallback(e => {
         setBuyValue(e.target.value);
@@ -73,9 +89,9 @@ const VaultTrade = ({tradeProduct}) => {
                         (<div className='execute-button' id="purchase-button" onClick={buyOption}>
                             <b>Purchase</b>
                         </div>) :
-                        (<div class="loading__container">
-                        <div class="loading--cycle"></div>
-                      </div>)
+                         (<div className='execute-button' id="purchase-button" onClick={buyOption}>
+                            <b>{loadingText}</b>
+                        </div>)
                     }
                     
                 </div>
@@ -98,9 +114,9 @@ const VaultTrade = ({tradeProduct}) => {
                         (<div className='execute-button' id="deposit-button" onClick={writeOption}>
                             <b>Write</b>
                         </div>) :
-                        (<div class="loading__container">
-                        <div class="loading--cycle"></div>
-                      </div>)
+                        (<div className='execute-button' id="deposit-button" onClick={writeOption}>
+                            <b>{loadingText}</b>
+                        </div>)
                     }
                 </div>
             </div>

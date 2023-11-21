@@ -26,7 +26,6 @@ const VaultPrice = ({chosenVault, setTradePhase, setTradeProduct}) => {
 
     useEffect(() => {
         if(vaultInfo != null && chosenVault != null) {
-
             getAvailable(vaultInfo, chosenVault.round, setAvailables);
         }
     }, [vaultInfo, chosenVault]);

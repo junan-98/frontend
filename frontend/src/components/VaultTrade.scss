@@ -77,14 +77,26 @@ input {
 #purchase-button {
     background: linear-gradient(135deg, #6e48aa, #9d50bb); // purple gradient
     border: none;
+    
+    width: 100px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     &:hover {
       background: linear-gradient(135deg, #9d50bb, #6e48aa); // hover effect
     }
   }
   
-  #deposit-button {
+#deposit-button {
     background: linear-gradient(135deg, #ff5f6d, #ffc371); // orange-pink gradient
     border: none;
+
+    width: 100px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     &:hover {
       background: linear-gradient(135deg, #ffc371, #ff5f6d); // hover effect
     }

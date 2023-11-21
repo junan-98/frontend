@@ -1,7 +1,6 @@
 import { ethers } from "ethers";
-import { approveUSDC, allowanceUSDC, RPC } from "./tokenTransaction";
-import { updateOrders } from "./api";
-import VaultTrade from "../components/VaultTrade";
+import { approveUSDC, allowanceUSDC } from "./tokenTransaction";
+import { updateOrders, updateSettled } from "./api";
 
 const DOV_ABI= [
     "function purchase(uint strikeIndex, uint amount, address to) external returns (uint premium)",
@@ -89,12 +88,14 @@ export async function depositOption(tradeProduct, amount, setTradingStatus) {
         
         console.log(ethers.utils.parseUnits(collateral.toString(), 12));
         const txn = await contract.deposit(strikeIndex, ethers.utils.parseUnits(collateral.toString(), 12), clientAddress);
-        await txn.wait();
+        const receipt = await txn.wait();
+        const tokenId = Number(receipt.logs[2].topics[3]);
         setTradingStatus('default');
-        console.log("Deposit successful:", txn.hash);
+        console.log("receipt:", receipt);
+        console.log('tokenId:', tokenId);
 
         // update trade info
-        updateOrders(clientAddress, 'write', amount, tradeProduct);
+        updateOrders(clientAddress, 'write', amount, tradeProduct, tokenId);
         
       } catch (error) {
         setTradingStatus('default');
@@ -102,16 +103,63 @@ export async function depositOption(tradeProduct, amount, setTradingStatus) {
     } 
 }
 
+// settle(uint strikeIndex, uint amount, uint round, address to)
+export async function settle(position) {
+    try{
+        const contractAddress = position.option.optionAddress;
+        const amount = ethers.utils.parseEther(position.amount.toString());
+        const round = position.round;
+        // need update api
+        const strikeIndex = position.strikeIndex;
+        let provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = provider.getSigner();
+        const clientAddress = await signer.getAddress();
+        
+        console.log('settle param check', strikeIndex, amount, round, clientAddress);
+        // const contract = new ethers.Contract(contractAddress, DOV_ABI, signer);
+        // const txn = await contract.settle(strikeIndex, amount, round, clientAddress);
+        // await txn.wait();
+        
+        // update backend
+        updateSettled(position.orderId);
+    } catch(error) {
+        console.log('ERROR WHILE SETTLE', error);
+    }
+    
+}
+
+//withdraw(uint tokenId, address to) external returns(uint256 writerPnl)
+export async function withdraw(position) {
+    try{
+        const contractAddress = position.option.optionAddress;
+        // need update api
+        const tokenId = position.tokenId;
+        
+        let provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = provider.getSigner();
+        const clientAddress = await signer.getAddress();
+        
+        console.log('settle param check', tokenId, clientAddress);
+        // const contract = new ethers.Contract(contractAddress, DOV_ABI, signer);
+        // const txn = await contract.withdraw(tokenId, clientAddress);
+        // await txn.wait();
+
+        updateSettled(position.orderId);
+    } catch(error) {
+        console.log('ERROR WHILE SETTLE', error);
+    }
+}
+
 const normalizeDecimal = (avaialbe) => {
     return Number(avaialbe) / 10 ** 18;
 }
 
 export async function getAvailable(vault, round, setAvailables) {
-    console.log('!',vault);
-    console.log('!', round);
    try {
+        console.log(1);
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner();
+        console.log(1);
         const contract = new ethers.Contract(vault[0].address, DOV_ABI, signer);
         const result = await contract.getAvailable(round)
         const avaialbes = result.map(normalizeDecimal);

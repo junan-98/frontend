@@ -11,6 +11,7 @@ const PositionClose = ({closedPosition}) => {
         <table style={{ borderCollapse: 'collapse' }}>
                 <thead>
                     <tr>
+                        <th>Index</th>
                         <th>Product</th>
                         <th>Round</th>
                         <th>Strike Price</th>
@@ -23,6 +24,7 @@ const PositionClose = ({closedPosition}) => {
                 {closedPosition.map((position, index) => {
                     return (
                         <tr style={{ backgroundColor: index % 2 === 0 ? '#ffffff' : '#f1f3f5' }} key={index}>
+                            <td>{index}</td>
                             <td>{position.product}</td>
                             <td>{position.round}</td>
                             <td>{position.strike_price}</td>

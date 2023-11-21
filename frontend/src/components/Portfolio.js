@@ -10,27 +10,22 @@ const Portfolio = ({wallet}) => {
     const [openedPosition, setOpenedPosition] = useState([]);
     const [closedPosition, setClosedPosition] = useState([]);
     const [balances, setBalances] = useState([]);
-    const [loading, setLoading] = useState(false);
+
     useEffect(() => {
         const fetchData = async () => {
-            setLoading(true);
             try {
-                await getOpenedPosition(setOpenedPosition);
-                await getClosedPosition(setClosedPosition);
+                await getOpenedPosition(setOpenedPosition, wallet.address);
+                await getClosedPosition(setClosedPosition, wallet.address);
                 const b = await getPortfolioBalance(wallet.address);
                 setBalances(b);
             } catch(e) {
                 console.log(e)
             };
-            setLoading(false);
+
         };
         fetchData();
     }, [wallet]);
-    // if(loading) {
-    //     return (<div class="loading__container">
-    //     <div class="loading--cycle"></div>
-    //   </div>)
-    // }
+
     return (
         <div className="Portfolio">
             <div className="portfolio-left">

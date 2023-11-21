@@ -35,7 +35,11 @@
         margin: 0;
         padding: 10px;
         border-radius: 0.5rem;
-        background-color: #FFA500;
+        background: linear-gradient(135deg, #ff9966, #ff5e62); // darker orange gradient
+        border: none;
+        &:hover {
+          background: linear-gradient(135deg, #ff5e62, #ff9966); // hover effect
+        }
 
         &:hover {
             cursor: pointer; /* 마우스가 올라갔을 때 커서를 포인터로 변경 */

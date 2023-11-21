@@ -70,7 +70,7 @@ const VaultTrade = ({tradeProduct}) => {
                     </div>
                     {
                         tradingStatus === 'default' ? 
-                        (<div className='execute-button' onClick={buyOption}>
+                        (<div className='execute-button' id="purchase-button" onClick={buyOption}>
                             <b>Purchase</b>
                         </div>) :
                         (<div class="loading__container">
@@ -95,7 +95,7 @@ const VaultTrade = ({tradeProduct}) => {
                     </div>
                     {
                         tradingStatus === 'default' ? 
-                        (<div className='execute-button' onClick={writeOption}>
+                        (<div className='execute-button' id="deposit-button" onClick={writeOption}>
                             <b>Write</b>
                         </div>) :
                         (<div class="loading__container">

@@ -7,6 +7,7 @@
     width: 60%;
     flex-direction: column;
     margin-left: 20px;
+    overflow: auto; //차트 오버플로우 방지
   }
   .vault-right {
     margin-right: 20px;
@@ -36,12 +37,17 @@
 
 #vault-index {
   flex: 1;
-  border: 1px solid black;
+  border: 1px solid #989898; // Darker silver-like border color
   margin: 5px;
   height: 20px;
   border-radius: 0.5rem;
-
   display: flex;
   justify-content: center;
   align-items: center;
+
+  background: linear-gradient(145deg, #bcbcbc, #dcdcdc); // Darker metallic gradient
+  box-shadow: 5px 5px 15px #888888, -5px -5px 15px #f0f0f0; // Adjusted shadows for depth
+
 }
+
+

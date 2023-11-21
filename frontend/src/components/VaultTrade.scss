@@ -6,7 +6,6 @@
     
 
     .trade-buy {
-        border: 2px solid black;
         border-radius: 5px;
         width: 80%;
         height: 600px;
@@ -20,7 +19,6 @@
     }
 
     .trade-sell {
-        border: 2px solid black;
         border-radius: 5px;
         width: 80%;
         height: 270px;
@@ -73,12 +71,26 @@ input {
     padding-right: 40px;
     margin-bottom: 10px;
 
-    
-
     &:hover {
         cursor: pointer;
     }
 }
+
+#purchase-button {
+    background: linear-gradient(135deg, #6e48aa, #9d50bb); // purple gradient
+    border: none;
+    &:hover {
+      background: linear-gradient(135deg, #9d50bb, #6e48aa); // hover effect
+    }
+  }
+  
+  #deposit-button {
+    background: linear-gradient(135deg, #ff5f6d, #ffc371); // orange-pink gradient
+    border: none;
+    &:hover {
+      background: linear-gradient(135deg, #ffc371, #ff5f6d); // hover effect
+    }
+  }
 
 .loading--cycle {
     width: 50px;
@@ -93,3 +105,16 @@ input {
       transform: rotate(1turn);
     }
   }
+
+  .trade-buy, .trade-sell {
+    border: 2px solid #B0B0B0; // Silver-like border color
+    border-radius: 5px;
+    width: 80%;
+    margin-left: 50px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(145deg, #e6e6e6, #ffffff); // Metallic gradient
+    box-shadow: 5px 5px 15px #aaaaaa, -5px -5px 15px #ffffff; // Shadow for depth
+}

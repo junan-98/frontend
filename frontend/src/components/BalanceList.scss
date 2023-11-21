@@ -1,5 +1,5 @@
 .balance-list {
-    border: 2px solid black;
+    border: 2px solid #B0B0B0; // Silver-like border color
     margin: 10px;
     border-radius: 1.5rem;
     height: 300px;
@@ -7,9 +7,11 @@
     display: flex;
     align-items: center;
     flex-direction: column;
+    background: linear-gradient(145deg, #e6e6e6, #ffffff); // Metallic gradient
+    box-shadow: 5px 5px 15px #aaaaaa, -5px -5px 15px #ffffff; // Shadow for depth
 
     .balance-mark {
         font-size: 2rem;
-
+        // Additional styling for balance-mark if needed
     }
 }

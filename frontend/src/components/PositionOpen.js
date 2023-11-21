@@ -33,7 +33,7 @@ const PositionOpen = ({openedPosition}) => {
                 {openedPosition.map((position, index) => {
                     console.log(position);
                     return (
-                        <tr style={{ backgroundColor: index % 2 === 0 ? '#ffffff' : '#f1f3f5' }} key={index}>
+                        <tr style={{ backgroundColor: index % 2 === 0 ? '#f2f2f2' : '#e6e6e6' }} key={index}>
                             <td>{position.product}</td>
                             <td>{position.round}</td>
                             <td>{position.strike_price}</td>
@@ -43,8 +43,8 @@ const PositionOpen = ({openedPosition}) => {
                             <td>{position.expiry}</td>
                             <td>
                                 {position.position !== 'write' ? 
-                                    <div className='positionExitButton' id='settlement' onClick={() => {settleOption(position)}}>settle</div> :
-                                        <div className='positionExitButton' id='withdraw' onClick={() => {withdrawOption(position)}}>withdraw</div>}
+                                    <div className='positionExitButton' id='settlement' onClick={() => {settleOption(position)}}><b>settle</b></div> :
+                                        <div className='positionExitButton' id='withdraw' onClick={() => {withdrawOption(position)}}><b>withdraw</b></div>}
                             </td>
                         </tr>
                     )

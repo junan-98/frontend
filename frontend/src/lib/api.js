@@ -64,6 +64,12 @@ export async function updateOrders(clientAddress, position, amount, tradeProduct
     };
 }
 
+function formatDate(dateString) {
+    const options = { year: '2-digit', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false };
+    return new Date(dateString).toLocaleString('de-DE', options).replace(",", "");
+}
+
+
 export async function getOpenedPosition(setOpenedPosition) {
     try {
         const response = await axios.get(
@@ -78,8 +84,8 @@ export async function getOpenedPosition(setOpenedPosition) {
                 strike_price: item.strikePrice,
                 settlement_price: item.settlementPrice,
                 amount: item.amount,
-                order_time: item.orderTime,
-                expiry: item.option.expiry,
+                order_time: formatDate(item.orderTime),
+                expiry: formatDate(item.option.expiry),
                 position: item.position,
                 option: item.option
             };
@@ -106,8 +112,8 @@ export async function getClosedPosition(setClosedPosition) {
                 strike_price: item.strikePrice,
                 settlement_price: item.settlementPrice,
                 amount: item.amount,
-                order_time: item.orderTime,
-                expiry: item.option.expiry,
+                order_time: formatDate(item.orderTime),
+                expiry: formatDate(item.option.expiry),
                 position: item.position,
                 option: item.option
             };

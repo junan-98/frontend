@@ -14,8 +14,8 @@ const ChartETH = () => {
           style={{ background: "white", maxWidth: "100%", maxHeight: "100%" }}
           interval="5m"
           containerStyle={{
-            minHeight: "500px",
-            minWidth: "900px",
+            width: "900px",
+            height: "500px",
           }}
           chartLayout={{
             layout: {
